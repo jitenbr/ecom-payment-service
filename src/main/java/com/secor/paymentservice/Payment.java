@@ -12,6 +12,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "payments")
 public class Payment {
+
     @Id
     @Column(name = "paymentid", nullable = false, length = 50)
     private String paymentid;

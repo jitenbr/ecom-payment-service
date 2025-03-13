@@ -20,6 +20,25 @@ public class MainRestController {
     @Autowired
     PaymentRepository paymentRepository;
 
+    @GetMapping("get/payment/{orderid}")
+    public ResponseEntity<?> getPayment(@PathVariable("orderid") String orderid)
+    {
+        Payment payment=null;
+
+        if(paymentRepository.findByOrderid(orderid).isPresent())
+        {
+            payment =  paymentRepository.findByOrderid(orderid).get();
+            log.info("Payment found: {}", payment);
+            return ResponseEntity.ok(payment);
+        }
+        else
+        {
+            log.info("Payment not found for orderid: {}", orderid);
+            return ResponseEntity.ok().body(null);
+        }
+
+    }
+
     @PostMapping("create/payment")
     public ResponseEntity<?> createPayment(@RequestBody PaymentRequest paymentRequest,
                                            @RequestHeader("Authorization") String token) throws InterruptedException {
@@ -30,7 +49,7 @@ public class MainRestController {
             log.info("Token is valid: {}", token);
             log.info("Received request to create payment: {}", paymentRequest);
 
-            //Thread.sleep(10000);
+            Thread.sleep(20000);
 
 //            throw new RuntimeException("Chaos Testing in Progress");
 

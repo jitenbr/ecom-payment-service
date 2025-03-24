@@ -49,7 +49,7 @@ public class MainRestController {
             log.info("Token is valid: {}", token);
             log.info("Received request to create payment: {}", paymentRequest);
 
-            Thread.sleep(20000);
+            Thread.sleep(60000);
 
 //            throw new RuntimeException("Chaos Testing in Progress");
 
